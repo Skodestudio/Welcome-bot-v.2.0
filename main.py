@@ -55,12 +55,12 @@ bot = commands.Bot(command_prefix='!', intents=intents)
 @bot.event
 async def on_ready():
     try:
-        ascii_art_text = text2art("Skode® Studio")
+        ascii_art_text = text2art("Skoda® Studio")
 
         print(Fore.LIGHTCYAN_EX + ascii_art_text + Style.RESET_ALL)
         print(Fore.LIGHTGREEN_EX + f"Logged in as {bot.user}" + Style.RESET_ALL)
 
-        await bot.change_presence(status=discord.Status.do_not_disturb, activity=discord.Activity(type=discord.ActivityType.listening, name="Skode® Studio"))
+        await bot.change_presence(status=discord.Status.do_not_disturb, activity=discord.Activity(type=discord.ActivityType.listening, name="Skoda® Studio"))
 
         create_link_json()
         load_invite_links()
@@ -103,7 +103,10 @@ async def on_member_join(member):
         description=welcome_message,
         color=0xea0d0d
     )
-    embed.set_thumbnail(url=member.avatar.url)
+
+    # تحقق إذا كان للعضو صورة شخصية
+    if member.avatar:
+        embed.set_thumbnail(url=member.avatar.url)
     
     embed.add_field(name="Username", value=member.name, inline=True)
     if used_invite:
